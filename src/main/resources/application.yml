@@ -1,0 +1,5 @@
+# sever
+# - 在 application.yml 的优先级没有 application.properties 高
+# - 所以: 端口是 8080 生效，而不是 8081
+server:
+  port: 8081
