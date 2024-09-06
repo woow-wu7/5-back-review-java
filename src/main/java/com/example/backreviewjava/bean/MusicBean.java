@@ -36,5 +36,6 @@ import java.util.Date;
 public class MusicBean {
     public String name;
     public String singer;
+    public Integer age;
     public Date time;
 }
