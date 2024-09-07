@@ -3,3 +3,10 @@
 # - 所以: 端口是 8080 生效，而不是 8081
 server:
   port: 8081
+
+# jackson
+# - globally format data through jackson.
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8

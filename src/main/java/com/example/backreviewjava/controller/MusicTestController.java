@@ -101,8 +101,8 @@ public class MusicTestController {
     @GetMapping("/all-musics")
     public ResponseEntity<List<MusicTestBean>> getAllMusic() {
 
-        MusicTestBean musicBean = new MusicTestBean("七里香", "八度空间", "周杰伦", new Date());
-        MusicTestBean musicBean2 = new MusicTestBean("晴天", "无与伦比", "周杰伦", new Date());
+        MusicTestBean musicBean = new MusicTestBean(1, "七里香", "八度空间", "周杰伦", new Date());
+        MusicTestBean musicBean2 = new MusicTestBean(2, "晴天", "无与伦比", "周杰伦", new Date());
         musics.add(musicBean);
         musics.add(musicBean2);
 
@@ -135,7 +135,7 @@ public class MusicTestController {
     })
     @DeleteMapping("/music/{musicId}")
     public ResponseEntity<MusicTestBean> deleteMusic(@PathVariable @Parameter(description = "musicId")  Integer musicId) {
-        MusicTestBean musicBean = new MusicTestBean("七里香", "八度空间", "周杰伦", new Date());
+        MusicTestBean musicBean = new MusicTestBean(1, "七里香", "八度空间", "周杰伦", new Date());
 
         System.out.println(musicId);
         log.info("Music deleted successfully" + musicId);

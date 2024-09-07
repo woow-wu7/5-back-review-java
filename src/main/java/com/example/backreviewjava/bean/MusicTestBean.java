@@ -1,5 +1,6 @@
 package com.example.backreviewjava.bean;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,13 @@ import java.util.Date;
 // @Component
 // - 将 Bean 注册为容器组件，具有 SpringBoot 的强大能力
 
+// Jackson
+// - @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+// - @JsonPropertyOrder({"name", "singer", "album",  "time"})
+// - @JsonProperty("music_singer")
+// - @JsonInclude(JsonInclude.Include.NON_NULL) // If the value is none, then it will not be return;
+// - @JsonIgnore // Do not return this field
+
 @Data
 @Builder
 @Slf4j
@@ -33,9 +41,20 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString // 以上都是 lombok的注解
 @Component
+@JsonPropertyOrder({"name", "singer", "album",  "time"})
 public class MusicTestBean {
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public Integer id;
+
     public String name;
+
+    @JsonIgnore
     public String album;
+
+    @JsonProperty("music_singer")
     public String singer;
+
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     public Date time;
 }

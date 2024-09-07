@@ -15,6 +15,10 @@
     </properties>
 
     <dependencies>
+
+        <!-- spring-boot-starter-web -->
+        <!-- web场景启动器 -->
+        <!-- 内置了 jackson -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -38,7 +42,6 @@
             <scope>provided</scope>
         </dependency>
 
-
         <!-- 2 -->
         <!-- spring-boot-devtools 从新构建 -->
         <!--实现重新构建，快捷键：command + f9 则可以重新构建，不需要在重新run-->
@@ -51,13 +54,17 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- 2 -->
-        <!-- swagger Specification 3-->
+        <!-- 3 -->
+        <!-- swagger Specification 3 -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.10</version> <!-- 确认使用最新的稳定版本 -->
         </dependency>
+
+        <!-- 4 -->
+        <!-- jackson -->
+        <!-- jackson 内置在了 spring-boot-starter-web，所以不需要再安装了  -->
 
 
     </dependencies>
