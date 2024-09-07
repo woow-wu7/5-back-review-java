@@ -33,9 +33,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString // 以上都是 lombok的注解
 @Component
-public class MusicBean {
+public class MusicTestBean {
     public String name;
+    public String album;
     public String singer;
-    public Integer age;
     public Date time;
 }
