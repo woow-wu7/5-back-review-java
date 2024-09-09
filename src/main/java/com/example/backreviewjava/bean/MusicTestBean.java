@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 
-
 // @Data
 // - 是lombok的注解
 // - @Data会自动生成 @Getter @Setter @ToString @EqualsAndHashCode @RequiredArgsConstructor
@@ -41,7 +40,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString // 以上都是 lombok的注解
 @Component
-@JsonPropertyOrder({"name", "singer", "album",  "time"})
+@JsonPropertyOrder({"name", "singer", "album", "time"})
 public class MusicTestBean {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -49,7 +48,7 @@ public class MusicTestBean {
 
     public String name;
 
-    @JsonIgnore
+    // @JsonIgnore // ignore this field
     public String album;
 
     @JsonProperty("music_singer")

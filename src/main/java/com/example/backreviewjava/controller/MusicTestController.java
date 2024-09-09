@@ -30,6 +30,7 @@ import java.util.List;
 // - request header parameters
 
 // 3
+
 /**
  * @Controller 可以返回html页面
  * @RestController 不能返回html页面，返回的内容就是return的内容
@@ -52,7 +53,6 @@ import java.util.List;
 // Spring boot
 // - @RequestBody
 // - @PathVariable
-
 
 
 @Tag(name = "7-back-review-java-api", description = "Operations for public access")
@@ -81,11 +81,13 @@ public class MusicTestController {
                     content = @Content)
     })
     @GetMapping("/music")
-    public MusicTestBean getMusic(@RequestParam(required = false) String name, @RequestParam(defaultValue = "周杰伦")   @Parameter(description = "default singer is Jiezhou") String singer) {
+    public MusicTestBean getMusic(@RequestParam(required = true, defaultValue = "七里香") String name,
+                                  @RequestParam(required = false) String singer,
+                                  @RequestParam(required = false) @Parameter(description = "album") String album) {
         return musicBean.builder()
                 .name(name)
-                .singer("wu99")
-                .album(singer)
+                .singer(singer)
+                .album(album)
                 .time(new Date())
                 .build();
     }
@@ -108,7 +110,6 @@ public class MusicTestController {
 
         return ResponseEntity.ok(musics);
     }
-
 
 
     // [2]
@@ -134,12 +135,12 @@ public class MusicTestController {
             @ApiResponse(responseCode = "404", description = "Music deleted unsuccessfully", content = @Content)
     })
     @DeleteMapping("/music/{musicId}")
-    public ResponseEntity<MusicTestBean> deleteMusic(@PathVariable @Parameter(description = "musicId")  Integer musicId) {
+    public ResponseEntity<MusicTestBean> deleteMusic(@PathVariable @Parameter(description = "musicId") Integer musicId) {
         MusicTestBean musicBean = new MusicTestBean(1, "七里香", "八度空间", "周杰伦", new Date());
 
         System.out.println(musicId);
         log.info("Music deleted successfully" + musicId);
 
-        return  ResponseEntity.status(201).body(musicBean);
+        return ResponseEntity.status(201).body(musicBean);
     }
 }
