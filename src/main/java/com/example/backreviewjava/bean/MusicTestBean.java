@@ -5,7 +5,16 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
+
+
+// 注意:
+// - 1. 本文件学习 ( swagger3 ) ( lombok 注解 )
+// - 2. 学习 ( JPA ) 请到 ( model/Musics )
 
 
 // @Data
@@ -38,11 +47,15 @@ import java.util.Date;
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString // 以上都是 lombok的注解
+@ToString // 以上都是 lombok 的注解
 @Component
-@JsonPropertyOrder({"name", "singer", "album", "time"})
+@JsonPropertyOrder({"name", "singer", "album", "date"})
+//@Entity // 表示是一个实体类，接受 jpa管理
+//@Table(name = "musics")
 public class MusicTestBean {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer id;
 
@@ -55,5 +68,5 @@ public class MusicTestBean {
     public String singer;
 
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-    public Date time;
+    public Date date;
 }

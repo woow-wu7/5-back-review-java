@@ -58,7 +58,7 @@ import java.util.List;
 @Tag(name = "7-back-review-java-api", description = "Operations for public access")
 @RestController
 @Slf4j
-@RequestMapping("/music-api")
+@RequestMapping("/music-test-api")
 public class MusicTestController {
 
     @Autowired
@@ -88,7 +88,7 @@ public class MusicTestController {
                 .name(name)
                 .singer(singer)
                 .album(album)
-                .time(new Date())
+                .date(new Date())
                 .build();
     }
 

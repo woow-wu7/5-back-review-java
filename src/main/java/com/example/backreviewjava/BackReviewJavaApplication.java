@@ -2,7 +2,9 @@ package com.example.backreviewjava;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 // 1
 // 问题：如何运行整个程序？
@@ -32,6 +34,8 @@ import org.springframework.context.annotation.ComponentScan;
 // - 这里 @ComponentScan 用来告诉springboot 去哪里找 controller
 
 @SpringBootApplication(scanBasePackages = {"com.example.backreviewjava"})
+//@EnableJpaRepositories
+//@EntityScan("com.example.backreviewjava.model") // 添加此行
 public class BackReviewJavaApplication {
 
     public static void main(String[] args) {
