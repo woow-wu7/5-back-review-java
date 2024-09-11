@@ -30,7 +30,6 @@ import java.util.List;
 // - request header parameters
 
 // 3
-
 /**
  * @Controller 可以返回html页面
  * @RestController 不能返回html页面，返回的内容就是return的内容
@@ -59,7 +58,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequestMapping("/music-test-api")
-public class MusicTestController {
+public class MusicTestController_1 {
 
     @Autowired
     public MusicTestBean musicBean;

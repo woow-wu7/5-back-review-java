@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
-public class MusicModel {
+public class MusicMybatisModel {
     public Integer id;
     public String name;
     public String album;

@@ -96,7 +96,15 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- 10 -->
+        <!-- 9 -->
+        <!-- spring-boot-starter-data-jdbc -->
+        <!-- 注意区分 ( spring-boot-starter-data-jdbc ) 和 ( spring-boot-starter-jdbc ) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
+
+        <!-- 9 -->
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -105,27 +113,14 @@
         </dependency>
 
 
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- PostgreSQL 驱动 -->
-<!--        <dependency>-->
-<!--            <groupId>org.postgresql</groupId>-->
-<!--            <artifactId>postgresql</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
 
-        <!-- 10 -->
-        <!-- spring-boot-starter-data-jdbc -->
-        <!-- 注意区分 ( spring-boot-starter-data-jdbc ) 和 ( spring-boot-starter-jdbc ) -->
-        <!-- 注意：我们使用了 jpa 就不再需要 jdbc 了-->
-        <!-- <dependency>-->
-        <!--   <groupId>org.springframework.boot</groupId>-->
-        <!--   <artifactId>spring-boot-starter-data-jdbc</artifactId>-->
-        <!-- </dependency>-->
     </dependencies>
 
     <dependencyManagement>
