@@ -60,8 +60,14 @@ import java.util.List;
 @RequestMapping("/music-test-api")
 public class MusicTestController_1 {
 
+    private final MusicTestBean musicBean;
     @Autowired
-    public MusicTestBean musicBean;
+    public MusicTestController_1(MusicTestBean musicBean) {
+        this.musicBean = musicBean;
+    }
+    // 以下两行代码使用 上面代码代替就不会有warning
+    //    @Autowired
+    //    public MusicTestBean musicBean;
 
     private List<MusicTestBean> musics = new ArrayList<>();
 

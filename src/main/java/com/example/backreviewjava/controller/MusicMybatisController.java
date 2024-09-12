@@ -17,8 +17,14 @@ import java.util.List;
 @Controller
 public class MusicMybatisController {
 
+    private final PaginationMybatisMusicDTO paginationMybatisMusicDTO;
     @Autowired
-    PaginationMybatisMusicDTO paginationMybatisMusicDTO;
+    public MusicMybatisController (PaginationMybatisMusicDTO paginationMybatisMusicDTO)   {
+        this.paginationMybatisMusicDTO = paginationMybatisMusicDTO;
+    }
+    // 以下两行代码使用 上面代码代替就不会有warning
+    // @Autowired
+    // PaginationMybatisMusicDTO paginationMybatisMusicDTO;
 
     @Autowired
     MusicMybatisService musicMybatisService;
