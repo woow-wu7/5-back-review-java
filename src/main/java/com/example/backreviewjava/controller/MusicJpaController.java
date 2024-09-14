@@ -1,6 +1,6 @@
 package com.example.backreviewjava.controller;
 
-import com.example.backreviewjava.jpa.entity.MusicJpaModel;
+import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import com.example.backreviewjava.service.MusicJpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class MusicJpaController {
     }
 
     @GetMapping("all-music")
-    public List<MusicJpaModel> getAllMusic() {
+    public List<MusicJpaEntity> getAllMusic() {
         System.out.println("getAllMusic==========");
         return musicJpaService.getAllMusics();
     }

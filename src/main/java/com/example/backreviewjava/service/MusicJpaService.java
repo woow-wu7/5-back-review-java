@@ -2,7 +2,7 @@
 package com.example.backreviewjava.service;
 
 import com.example.backreviewjava.jpa.repository.MusicJpaRepository;
-import com.example.backreviewjava.jpa.entity.MusicJpaModel;
+import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ public class MusicJpaService {
         this.musicJpaRepository = musicJpaRepository;
     }
 
-    public List<MusicJpaModel> getAllMusics() {
+    public List<MusicJpaEntity> getAllMusics() {
         return musicJpaRepository.findAll();
     }
 

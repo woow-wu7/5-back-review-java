@@ -24,7 +24,7 @@ import java.util.Date;
 //@Component
 @Entity
 @Table(name = "music")
-public class MusicJpaModel {
+public class MusicJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @JsonInclude(JsonInclude.Include.NON_NULL)
