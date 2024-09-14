@@ -10,6 +10,7 @@ server:
 # ------- ------- ------- ------- ------- ------- -------
 # 2
 spring:
+
   # 2.1
   # jackson
   # - globally format data through jackson.
@@ -34,26 +35,18 @@ spring:
     # 2. mysql驱动 => mysql-connector-java
     # 3. jdbc连接池 => spring-boot-starter-jdbc
     # 4. 更进一步：还可以使用 ( Druid数据源 + MyBatis )
-#    url: jdbc:mysql://localhost:3306/personal_music?serverTimezone=GMT%2B8&useSSL=false
-#    username: root
-#    password: rootroot
-#    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/personal_music?serverTimezone=GMT%2B8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: rootroot
-#  jpa:
-##    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-#    database-platform: org.hibernate.dialect.H2Dialect
-#    hibernate:
-#      ddl-auto: update
-#    database: mysql
-#    show-sql: true
-#    jdbc:
-#      template:
-#        query-timeout: 10 # 10s没查出来就超时
 
-# 日志
-#logging:
-#  level:
-#    org.springframework.boot.autoconfigure: DEBUG
+  # 2.5
+  # show-sql: true 表示开启sql语句日志
+  # hibernate.ddl-auto: update; 没有数据库时自动创建 [ hibernate:冬眠 n ]
+  jpa:
+    # database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    show-sql: true

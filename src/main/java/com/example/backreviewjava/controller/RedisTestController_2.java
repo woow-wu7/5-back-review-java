@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/redis")
+@RequestMapping("/redis-api")
 @Slf4j
 public class RedisTestController_2 {
 
@@ -43,9 +43,10 @@ public class RedisTestController_2 {
     // - 2. 头部信息控制/header：你可以添加自定义的HTTP头部信息
     // - 3. 响应体控制/body：你可以指定响应体的内容
     // - 4. entity: 实体 n
-    // ResponseEntity.status(HttpStatus.OK).body(value); // 200
-    // ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get value"); // 500
+    // ResponseEntity.status(HttpStatus.OK).headers(headers).body("Response with custom header");
     // ResponseEntity.ok().headers(headers).body("Response with custom header"); // .ok = .status(HttpStatus.OK).
+    // ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to get value"); // 500
+    // ResponseEntity.status(HttpStatus.OK).body(value); // 200
     @GetMapping("/get")
     public ResponseEntity<?> getValue(@RequestParam String key) {
         log.debug("Getting value for key: {}", key);
