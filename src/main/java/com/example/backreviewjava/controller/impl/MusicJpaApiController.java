@@ -51,6 +51,19 @@ public class MusicJpaApiController implements MusicJpaApi {
         musicJpaService.addMusic(music);
     }
 
+    // 4
+    // editMusic
+    public void editMusic(@RequestBody MusicJpaEntity music) {
+        log.warn("editMusic==========>MusicJpaApiController/editMusic/music={}", music);
+        musicJpaService.editMusic(music);
+    }
+
+    // 5
+    public void deleteMusic(@PathVariable Integer id) {
+        log.warn("deleteMusic==========>MusicJpaApiController/deleteMusic/id={}", id);
+        musicJpaService.deleteMusic(id);
+    }
+
 
 //
 //    @GetMapping("/{id}")

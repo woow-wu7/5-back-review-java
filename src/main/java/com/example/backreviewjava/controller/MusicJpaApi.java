@@ -2,6 +2,7 @@ package com.example.backreviewjava.controller;
 
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,6 +39,32 @@ public interface MusicJpaApi {
     public MusicJpaEntity getMusicById(@PathVariable Integer id);
 
     // 3
+    // addMusic
+    @Operation(summary = "Add a music", description = "Add a music")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Music created successfully", content = @Content(schema = @Schema(implementation = MusicJpaEntity.class))),
+            @ApiResponse(responseCode = "400", description = "Music created unsuccessfully", content = @Content)
+    })
     @RequestMapping(value = "/music", method = RequestMethod.POST)
-    public void  addMusic(@RequestBody MusicJpaEntity music);
+    public void addMusic(@RequestBody @Parameter(description = "music", required = true, schema = @Schema(implementation = MusicJpaEntity.class)) MusicJpaEntity music);
+
+    // 4
+    // edit
+    @Operation(summary = "Edit a music", description = "Edit a music")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Music edited successfully", content = @Content(schema = @Schema(implementation = MusicJpaEntity.class))),
+            @ApiResponse(responseCode = "400", description = "Music edited unsuccessfully", content = @Content)
+    })
+    @RequestMapping(value = "/music", method = RequestMethod.PUT)
+    public  void editMusic(@RequestBody MusicJpaEntity music);
+
+    // 5
+    // delete
+    @Operation(summary = "Delete a music", description = "Delete a music")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Music deleted successfully", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Music deleted unsuccessfully", content = @Content)
+    })
+    @RequestMapping(value = "/music/{id}", method = RequestMethod.DELETE)
+    public void deleteMusic(@PathVariable Integer id);
 }

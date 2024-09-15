@@ -13,4 +13,8 @@ public interface MusicJpaService {
     public  MusicJpaEntity getMusicById(Integer id);
 
     public void addMusic(MusicJpaEntity music);
+
+    public void editMusic(MusicJpaEntity music);
+
+    public void deleteMusic(Integer id);
 }
