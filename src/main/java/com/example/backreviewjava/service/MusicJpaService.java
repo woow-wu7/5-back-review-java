@@ -1,25 +1,16 @@
-
 package com.example.backreviewjava.service;
 
-import com.example.backreviewjava.jpa.repository.MusicJpaRepository;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.backreviewjava.service.impl.MusicJpaServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.zip.Inflater;
 
-@Service
-public class MusicJpaService {
+public interface MusicJpaService {
+    public List<MusicJpaEntity> getAllMusics();
 
-    private final MusicJpaRepository musicJpaRepository;
-    // @Resource
-    @Autowired
-    public MusicJpaService(MusicJpaRepository musicJpaRepository) {
-        this.musicJpaRepository = musicJpaRepository;
-    }
+    public  MusicJpaEntity getMusicById(Integer id);
 
-    public List<MusicJpaEntity> getAllMusics() {
-        return musicJpaRepository.findAll();
-    }
-
+    public void addMusic(MusicJpaEntity music);
 }

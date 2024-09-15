@@ -3,6 +3,10 @@ package com.example.backreviewjava.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,20 +35,20 @@ import java.util.Date;
 // -- correspond: 对应 相当于 类似于
 // -- 【 correspond to. 和...相对应 】
 
-//@Data
-//@Builder
-//@AllArgsConstructor
-//@NoArgsConstructor
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 //@ToString // 以上都是 lombok的注解
 //@JsonPropertyOrder({"name", "singer", "album", "date"}) // 以上是 swagger3 的注解
-//@Slf4j
+@Slf4j
 //@Component
 @Entity
 @Table(name = "music")
 public class MusicJpaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // identity
+    @Column(name = "id", nullable = false, unique = true, length = 64)
     // @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer id;
 
@@ -58,14 +62,17 @@ public class MusicJpaEntity {
     // -- correspond: 对应 相当于 类似于
     // -- 【 correspond to. 和...相对应 】
     @Column(name = "name", nullable = false, unique = true, length = 512)
-    public String music_name;
+    public String name;
 
     // @JsonIgnore // ignore this field
+    @Column(name = "album", nullable = true)
     public String album;
 
-    @JsonProperty("music_singer")
+    @Column(name = "singer", nullable = true)
+//    @JsonProperty("music_singer")
     public String singer;
 
+    @Column(name = "date", nullable = true)
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     public Date date;
 }
