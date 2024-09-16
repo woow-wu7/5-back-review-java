@@ -1,6 +1,7 @@
 
 package com.example.backreviewjava.service.impl;
 
+import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.jpa.repository.MusicJpaRepository;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import com.example.backreviewjava.service.MusicJpaService;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,9 +25,20 @@ public class MusicJpaServiceImpl implements MusicJpaService {
 
     // 1
     // findAll()
-    public List<MusicJpaEntity> getAllMusics() {
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusics() {
         log.warn("getAllMusic==========>MusicJpaServiceImpl/musicJpaRepository/findAll");
-        return musicJpaRepository.findAll();
+
+        List<MusicJpaEntity> musics =  musicJpaRepository.findAll();
+        Long total = musicJpaRepository.count();
+
+        PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
+                .musics(Collections.singletonList(musics))
+                .total(total.intValue())
+                .current(1)
+                .pageSize(10)
+                .build();
+
+        return data;
     }
 
     // 1

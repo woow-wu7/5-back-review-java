@@ -1,5 +1,6 @@
 package com.example.backreviewjava.controller;
 
+import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,7 +26,7 @@ public interface MusicJpaApi {
             @ApiResponse(responseCode = "400", description = "Failed", content = @Content)
     })
     @RequestMapping(value = "/all-music", method = RequestMethod.GET)
-    public List<MusicJpaEntity> getAllMusics();
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusics();
 
 
     // 1

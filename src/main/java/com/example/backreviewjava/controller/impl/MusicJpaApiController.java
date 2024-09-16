@@ -1,6 +1,7 @@
 package com.example.backreviewjava.controller.impl;
 
 import com.example.backreviewjava.controller.MusicJpaApi;
+import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import com.example.backreviewjava.service.MusicJpaService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class MusicJpaApiController implements MusicJpaApi {
 
     // 1
     // getAllMusics
-    public List<MusicJpaEntity> getAllMusics() {
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusics() {
         log.warn("getAllMusic==========>MusicJpaApiController/getAllMusics");
         return musicJpaService.getAllMusics();
     }
