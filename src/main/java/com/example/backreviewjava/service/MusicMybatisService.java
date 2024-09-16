@@ -1,7 +1,7 @@
 package com.example.backreviewjava.service;
 
 
-import com.example.backreviewjava.PaginationDTO.PaginationMybatisMusicDTO;
+import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.mapper.MusicMybatisMapper;
 import com.example.backreviewjava.model.MusicMybatisModel;
 import lombok.extern.slf4j.Slf4j;

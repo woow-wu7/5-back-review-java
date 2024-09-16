@@ -35,7 +35,7 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     }
 
     // 1
-    // findByNameContaining(keyword)
+    // searchByKeyword(keyword)
     public List<MusicJpaEntity> searchMusic(String keyword) {
         return musicJpaRepository.searchByKeyword(keyword);
     }

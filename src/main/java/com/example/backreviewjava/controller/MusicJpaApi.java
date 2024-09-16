@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/music-jpa-api")
 @Tag(name = "Test jpa and swagger3", description = "Test jpa and swagger3")
+@RequestMapping("/music-jpa-api")
 public interface MusicJpaApi {
 
     // 1

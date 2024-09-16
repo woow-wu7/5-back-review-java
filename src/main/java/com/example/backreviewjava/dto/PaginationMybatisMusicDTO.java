@@ -1,4 +1,4 @@
-package com.example.backreviewjava.PaginationDTO;
+package com.example.backreviewjava.dto;
 
 
 import com.example.backreviewjava.model.MusicMybatisModel;
@@ -17,8 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @Slf4j
 @Component // 万能
-public class PaginationMybatisMusicDTO {
-    public List<MusicMybatisModel> musics;
+public class PaginationMybatisMusicDTO<T> {
+    public List<T> musics;
     public Integer total;
     public Integer current;
     public Integer pageSize;

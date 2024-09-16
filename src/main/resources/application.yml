@@ -26,13 +26,18 @@ spring:
     password: rootroot
 
   # 2.3
-  # static resource
+  # Configure static resources.
   # 2.3.1
-  # spring.web.resources.static-locations: classpath:/static/;
-  # -- this indicates the location of the static resources.
+  # spring.web.resources.static-locations: classpath:/custom-static/,classpath:/public/,classpath:/resources/,classpath:/static/
+  # -- this indicates the location of the directory for static resources.
+  # -- ( custom-static/public/resources/static ) the all directories are static resources.
   # 2.3.2
   # spring.mvc.static-path-pattern: /resources/**
   # -- this indicates the request path to access the static resource.
+  # -- http://localhost:9999/resources/logo.png can access the static image.
+  # English
+  # -- configure 配置 v
+  # -- configuration 配置 n
   web:
     resources:
       static-locations: classpath:/custom-static/,classpath:/public/,classpath:/resources/,classpath:/static/
