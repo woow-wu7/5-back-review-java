@@ -12,9 +12,13 @@ public interface MusicJpaService {
 
     public  MusicJpaEntity getMusicById(Integer id);
 
+    public List<MusicJpaEntity> searchMusic(String keyword);
+
     public void addMusic(MusicJpaEntity music);
 
     public void editMusic(MusicJpaEntity music);
 
     public void deleteMusic(Integer id);
+
+
 }

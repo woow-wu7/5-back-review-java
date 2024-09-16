@@ -28,7 +28,7 @@ public interface MusicJpaApi {
     public List<MusicJpaEntity> getAllMusics();
 
 
-    // 2
+    // 1
     // getMusicById
     @Operation(summary = "Get one music by id", description = "Returns a music")
     @ApiResponses(value = {
@@ -38,7 +38,18 @@ public interface MusicJpaApi {
     @RequestMapping(value = "/music/{id}", method = RequestMethod.GET)
     public MusicJpaEntity getMusicById(@PathVariable Integer id);
 
-    // 3
+    // 1
+    // searchMusic
+    // -- fuzzy query
+    @Operation(summary = "Search a music", description = "Search a music")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful", content = @Content(array = @ArraySchema(schema = @Schema(implementation = MusicJpaEntity.class)))),
+            @ApiResponse(responseCode = "400", description = "Failed", content = @Content)
+    })
+    @RequestMapping(value = "/music", method = RequestMethod.GET)
+    public List<MusicJpaEntity> searchMusic(@RequestParam String keyword);
+
+    // 2
     // addMusic
     @Operation(summary = "Add a music", description = "Add a music")
     @ApiResponses(value = {
@@ -48,7 +59,7 @@ public interface MusicJpaApi {
     @RequestMapping(value = "/music", method = RequestMethod.POST)
     public void addMusic(@RequestBody @Parameter(description = "music", required = true, schema = @Schema(implementation = MusicJpaEntity.class)) MusicJpaEntity music);
 
-    // 4
+    // 3
     // edit
     @Operation(summary = "Edit a music", description = "Edit a music")
     @ApiResponses(value = {
@@ -58,7 +69,7 @@ public interface MusicJpaApi {
     @RequestMapping(value = "/music", method = RequestMethod.PUT)
     public  void editMusic(@RequestBody MusicJpaEntity music);
 
-    // 5
+    // 4
     // delete
     @Operation(summary = "Delete a music", description = "Delete a music")
     @ApiResponses(value = {
@@ -67,4 +78,5 @@ public interface MusicJpaApi {
     })
     @RequestMapping(value = "/music/{id}", method = RequestMethod.DELETE)
     public void deleteMusic(@PathVariable Integer id);
+
 }

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,29 +37,35 @@ public class MusicJpaApiController implements MusicJpaApi {
         return musicJpaService.getAllMusics();
     }
 
-    // 2
+    // 1
     // getMusicById
     public MusicJpaEntity getMusicById(@PathVariable Integer id) {
         log.warn("getAllMusic==========>MusicJpaApiController/getMusicById/id={}", id);
         return musicJpaService.getMusicById(id);
     };
 
+    // 1
+    public List<MusicJpaEntity> searchMusic(@RequestParam String keyword) {
+        log.warn("searchMusic==========>MusicJpaApiController/searchMusic/keyword={}", keyword);
+        return musicJpaService.searchMusic(keyword);
+    }
 
-    // 3
+
+    // 2
     // addMusic
     public void addMusic(@RequestBody MusicJpaEntity music) {
         log.warn("addMusic==========>MusicJpaApiController/addMusic/music={}", music);
         musicJpaService.addMusic(music);
     }
 
-    // 4
+    // 3
     // editMusic
     public void editMusic(@RequestBody MusicJpaEntity music) {
         log.warn("editMusic==========>MusicJpaApiController/editMusic/music={}", music);
         musicJpaService.editMusic(music);
     }
 
-    // 5
+    // 4
     public void deleteMusic(@PathVariable Integer id) {
         log.warn("deleteMusic==========>MusicJpaApiController/deleteMusic/id={}", id);
         musicJpaService.deleteMusic(id);

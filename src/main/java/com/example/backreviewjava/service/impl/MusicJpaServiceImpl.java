@@ -28,27 +28,33 @@ public class MusicJpaServiceImpl implements MusicJpaService {
         return musicJpaRepository.findAll();
     }
 
-    // 2
+    // 1
     // findById(id),get()
     public  MusicJpaEntity getMusicById(Integer id) {
         return musicJpaRepository.findById(id).get();
     }
 
-    // 3
+    // 1
+    // findByNameContaining(keyword)
+    public List<MusicJpaEntity> searchMusic(String keyword) {
+        return musicJpaRepository.searchByKeyword(keyword);
+    }
+
+    // 2
     // save() - add
     public void  addMusic(MusicJpaEntity music) {
         log.warn("addMusic{}", music);
         musicJpaRepository.save(music);
     }
 
-    // 4
+    // 3
     // save() - edit
     public void editMusic(MusicJpaEntity music) {
         log.warn("editMusic{}", music);
         musicJpaRepository.save(music);
     }
 
-    // 5
+    // 4
     // deleteById
     public void deleteMusic(Integer id) {
         log.warn("deleteMusic==========>MusicJpaServiceImpl/deleteMusic/id={}", id);
