@@ -26,6 +26,16 @@ spring:
     password: rootroot
 
   # 2.3
+  # static resource
+  # 2.3.1
+  # spring.web.resources.static-locations: classpath:/static/;
+  # -- this indicates the location of the static resources.
+  # 2.3.2
+  # spring.mvc.static-path-pattern: /resources/**
+  # -- this indicates the request path to access the static resource.
+  web:
+    resources:
+      static-locations: classpath:/custom-static/,classpath:/public/,classpath:/resources/,classpath:/static/
   mvc:
     static-path-pattern: "/resources/**"
 
