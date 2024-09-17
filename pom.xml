@@ -46,7 +46,7 @@
         </dependency>
 
         <!-- 4 -->
-        <!-- spring-boot-devtools 从新构建 -->
+        <!-- spring-boot-devtools 重新构建 热更新 -->
         <!--实现重新构建，快捷键：command + f9 则可以重新构建，不需要在重新run-->
         <!-- 要实现热更新还需要设置两个地方，具体见我的博客 -->
         <!-- 博客地址：https://juejin.cn/post/6929145638898794503 -->
@@ -75,7 +75,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
         <!-- 8 -->
         <!-- spring-boot-starter-data-jpa -->
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
@@ -83,7 +82,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
         <!-- 8/9 -->
         <!-- mysql connector 驱动 -->
         <!-- mysql驱动注意点：( mysql驱动版本 ) 要和 ( mysql版本) 一致 -->
@@ -102,7 +100,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
-
         <!-- 9 -->
         <!-- mybatis -->
         <dependency>

@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+// 1
+// 这个接口的作用是用来处理
+// -- @RequestMapping 路径
+// -- Swagger3
+// -- 等注解用的，这样在真正的 controller class 中就干净很多了
 @Tag(name = "Test jpa and swagger3", description = "Test jpa and swagger3")
 @RequestMapping("/music-jpa-api")
 public interface MusicJpaApi {
