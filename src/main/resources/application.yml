@@ -65,3 +65,10 @@ spring:
       ddl-auto: update
     database: mysql
     show-sql: true
+
+  # 2.6
+  # spring-boot-starter-thymeleaf
+  # 主要用于显示resources/templates中的html
+  thymeleaf:
+    cache: false
+    mode: HTML

@@ -112,6 +112,15 @@
         </dependency>
 
 
+        <!-- 10 -->
+        <!-- spring-boot-starter-thymeleaf -->
+        <!-- 主要用于显示resources/templates中的html -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
