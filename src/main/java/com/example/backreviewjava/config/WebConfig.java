@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+// 1
+// 这里是 注册拦截器 register
 @Configuration
 public class WebConfig  implements WebMvcConfigurer {
 
