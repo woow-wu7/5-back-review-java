@@ -1,5 +1,6 @@
 package com.example.backreviewjava.controller.impl;
 
+import com.example.backreviewjava.config.DatabaseConfig;
 import com.example.backreviewjava.controller.MusicJpaApi;
 import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
@@ -31,10 +32,15 @@ public class MusicJpaApiController implements MusicJpaApi {
     }
 
 
+    @Autowired
+    DatabaseConfig databaseConfig;
+
+
     // 1
     // getAllMusics
     public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusics() {
         log.warn("getAllMusic==========>MusicJpaApiController/getAllMusics");
+        log.warn("databaseConfig: {}", databaseConfig.toString());
         return musicJpaService.getAllMusics();
     }
 
