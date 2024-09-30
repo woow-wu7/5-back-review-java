@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data // ----------------------------------------------------- 2. The【 following 】 four annotations are the functions of lombok.
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor // The four annotations are the functions of lombok.
+@NoArgsConstructor
 public class DatabaseConfig {
     private String username;
     private String password;
