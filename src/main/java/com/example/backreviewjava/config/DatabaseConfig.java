@@ -9,8 +9,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "spring.datasource") // the two annotations are used to attribute binding.
-@Data
+@ConfigurationProperties(prefix = "spring.datasource") // ---- 1. the 【 above 】 two 【 annotations 】 are used for attribute binding.
+@Data // ----------------------------------------------------- 2. The【 following 】 four annotations are the functions of lombok.
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor // The four annotations are the functions of lombok.

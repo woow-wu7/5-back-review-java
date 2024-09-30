@@ -26,21 +26,21 @@ public class MusicJpaApiController implements MusicJpaApi {
 
     // The 'final' keyword indicates the data is a constant.
     private final MusicJpaService musicJpaService;
+    private final DatabaseConfig databaseConfig;
+
+    // Inject multiple classes.
     @Autowired
-    public MusicJpaApiController(MusicJpaService musicJpaService) {
+    public MusicJpaApiController(MusicJpaService musicJpaService, DatabaseConfig databaseConfig) {
         this.musicJpaService = musicJpaService;
+        this.databaseConfig = databaseConfig;
     }
-
-
-    @Autowired
-    DatabaseConfig databaseConfig;
 
 
     // 1
     // getAllMusics
     public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusics() {
         log.warn("getAllMusic==========>MusicJpaApiController/getAllMusics");
-        log.warn("databaseConfig: {}", databaseConfig.toString());
+        log.warn("databaseConfig: this log is used to learn '@ConfigurationProperties' in 'DatabaseConfig' file {}", databaseConfig.toString());
         return musicJpaService.getAllMusics();
     }
 
@@ -49,7 +49,9 @@ public class MusicJpaApiController implements MusicJpaApi {
     public MusicJpaEntity getMusicById(@PathVariable Integer id) {
         log.warn("getAllMusic==========>MusicJpaApiController/getMusicById/id={}", id);
         return musicJpaService.getMusicById(id);
-    };
+    }
+
+    ;
 
     // 1
     public List<MusicJpaEntity> searchMusic(@RequestParam String keyword) {
