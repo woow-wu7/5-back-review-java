@@ -1,33 +1,70 @@
 package com.example.backreviewjava;
 
+import com.example.backreviewjava.bean.MusicTestBean;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.thymeleaf.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @SpringBootTest
 @DisplayName("JUnit5功能测试")
 public class FunctionTest {
 
+    @Autowired
+    MusicTestBean musicTestBean;
+
+    @Test
+    public void testTraverseArray() {
+        MusicTestBean musicTestBean1 = musicTestBean.builder().name("1").album("七里香").build();
+        MusicTestBean musicTestBean2 = musicTestBean.builder().name("2").album("七里香2").build();
+
+        MusicTestBean[] arrayMusic = new MusicTestBean[]{musicTestBean1, musicTestBean2};
+
+        for (MusicTestBean musicTestBean : arrayMusic) {
+            log.warn(musicTestBean.toString());
+            log.warn(musicTestBean.getName());
+
+            String musicName = musicTestBean.getName(); // get
+            musicTestBean.setName("B"); // set
+
+            log.warn(musicTestBean.getName());
+        }
+    }
+
     @Test
     public void testObjectUtilsIsEmpty() {
-        ArrayList arrayList = new ArrayList();
-        List<String> arrayList2 = Arrays.asList("a", "b");
-        int[] arrayInt = {1, 2, 3, 4, 5};
 
+        // 1 test traverse array.
+        int[] arrayInt = {1, 2, 3, 4, 5};
         ArrayList<Object> mixedList = new ArrayList<>();
         mixedList.add("a"); // 字符串
         mixedList.add(1);   // 整数
         mixedList.add(2);   // 整数
+        mixedList.add(arrayInt);
 
-        System.out.printf("arrayList" + arrayList);
-        System.out.printf("arrayList2" + arrayList2);
-        System.out.printf("arrayInt" + arrayInt);
+        for (Object object : mixedList) {
+            log.warn(object.toString());
+        }
+
+
+
+//        ArrayList arrayList = new ArrayList();
+//        List<String> arrayList2 = Arrays.asList("a", "b");
+//
+//
+//
+//        System.out.printf("arrayList" + arrayList);
+//        System.out.printf("arrayList2" + arrayList2);
+//        System.out.printf("arrayInt" + arrayInt);
 
 
         System.out.println("testObjectUtilsIsEmpty");
