@@ -9,13 +9,12 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
 @Slf4j
-public class Stream_Filter_Collect_Distinct_Test {
+public class Stream_Filter_Collect_Distinct_Test_2 {
 
     @Test
     public void streamTest() {

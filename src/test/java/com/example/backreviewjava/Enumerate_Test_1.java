@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class Enumerate_Test {
+public class Enumerate_Test_1 {
 
     // 1
     public enum Enum1 {
