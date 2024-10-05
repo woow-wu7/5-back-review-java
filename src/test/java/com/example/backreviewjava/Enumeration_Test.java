@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-public class Enumerate_Test {
+public class Enumeration_Test {
+    // 1. enumerate 枚举 列举 v
+    // 2. enumeration 枚举 n
 
     // 1
     public enum Enum1 {
@@ -15,9 +17,13 @@ public class Enumerate_Test {
     }
 
     // 2
+    @Getter
     public enum Enum2 {
         SUNDAY("100"), MONDAY("200"), TUESDAY("300");
-        private String dayNumber;
+
+        final String dayNumber;
+        // private String dayNumber;
+        // Field 'dayNumber' may be 'final'  => 不可变，应为没有 setter
 
         Enum2(String dayNumber) { // --------- write
             this.dayNumber = dayNumber;
@@ -33,11 +39,13 @@ public class Enumerate_Test {
     @Getter
     public enum Enum3 {
         SUNDAY("100"), MONDAY("200"), TUESDAY("300");
-        private String dayNumber;
+
+        final String dayNumber;
 
         Enum3(String dayNumber) { // --------- write
             this.dayNumber = dayNumber;
         }
+
         //  public String getDayNumber() { // ---- read
         //    return dayNumber;
         //  }
@@ -56,7 +64,7 @@ public class Enumerate_Test {
         log.warn("number = {}", monday.getDayNumber());
 
         // 2.2
-        for (Enum2 day : Enum2.values()) {
+        for (Enum2 day : Enum2.values()) { // ---------------------- enum.values() => for traversing enumeration.
             log.warn("day2 = {}", day); // ------------------------- value
             log.warn("day2Number = {}", day.getDayNumber()); // ---- parameter
         }

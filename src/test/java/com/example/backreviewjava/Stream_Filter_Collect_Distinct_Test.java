@@ -26,24 +26,25 @@ public class Stream_Filter_Collect_Distinct_Test {
         ArrayList<Person> list = new ArrayList<>();
         list.add(person1);
         list.add(person2);
-        list.add(person3); // 3 and 4 are repeated/duplicated. => distinct() // distinct 清楚的 不同的 adj
+        list.add(person3); // 3 and 4 are repeated/duplicated. => distinct() // distinct 不同的 清楚的 adj
         list.add(person4);
 
         // 1
+        // stream()
         List<Person> list2 = list.stream()
                 .map(p -> {
-                    p.setAge(p.getAge() * 10);
+                    p.setAge(p.age * 10); // ------------------------- = p.setAge(p.getAge() * 10);
                     return p;
                 })
-                .distinct()
-                .filter(p -> p.age > 250) // ------------- filter
-                .collect(Collectors.toList()); // ------- collect result to List.
+                .distinct() // --------------------------------------- remove duplicates. 删除重复项 // distinct 不同的 清楚的 adj
+                .filter(p -> p.age > 250) // ------------------------- filter
+                .collect(Collectors.toList()); // -------------------- collect result to List.
         log.warn(list2.toString());
 
         // 2
         Integer number3 = list2.stream()
-                .map(Person::getAge) // .map(p -> p.age) 等价
-                .reduce(0, (age1, age2) -> age1 + age2); // 使用 Lambda
+                .map(Person::getAge) // ------------------------------ .map(p -> p.age) 等价
+                .reduce(0, (age1, age2) -> age1 + age2); // -- 使用 Lambda
         log.warn(number3.toString());
     }
 
@@ -51,7 +52,8 @@ public class Stream_Filter_Collect_Distinct_Test {
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    class Person {
+    // Inner class 'Person' may be 'static'
+    static class Person {
         String name;
         Integer age;
     }
