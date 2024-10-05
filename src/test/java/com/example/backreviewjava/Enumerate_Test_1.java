@@ -7,13 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-<<<<<<<< HEAD:src/test/java/com/example/backreviewjava/Enumerate_Test_1.java
 public class Enumerate_Test_1 {
-========
-public class Enumeration_Test {
+
     // 1. enumerate 枚举 列举 v
     // 2. enumeration 枚举 n
->>>>>>>> 37a2a3270297cecb1213c25f5da9e06bbdfc9010:src/test/java/com/example/backreviewjava/Enumeration_Test.java
 
     // 1
     public enum Enum1 {
