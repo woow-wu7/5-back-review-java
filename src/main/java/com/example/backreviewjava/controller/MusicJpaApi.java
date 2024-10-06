@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 
@@ -44,6 +45,16 @@ public interface MusicJpaApi {
     })
     @RequestMapping(value = "/music/{id}", method = RequestMethod.GET)
     public MusicJpaEntity getMusicById(@PathVariable Integer id);
+
+    // 1
+    // getMusicsByIds
+    @Operation(summary = "Get one musics by ids.", description = "Returns a music list.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful", content = @Content(array = @ArraySchema(schema = @Schema(implementation = MusicJpaEntity.class)))),
+            @ApiResponse(responseCode = "400", description = "Failed", content = @Content)
+    })
+    @RequestMapping(value = "/musics", method = RequestMethod.GET)
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(@RequestParam String ids);
 
     // 1
     // searchMusic

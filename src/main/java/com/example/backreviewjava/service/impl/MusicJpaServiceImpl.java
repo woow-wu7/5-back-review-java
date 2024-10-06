@@ -17,6 +17,7 @@ import java.util.List;
 public class MusicJpaServiceImpl implements MusicJpaService {
 
     private final MusicJpaRepository musicJpaRepository;
+
     // @Resource
     @Autowired
     public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository) {
@@ -28,7 +29,7 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusics() {
         log.warn("getAllMusic==========>MusicJpaServiceImpl/musicJpaRepository/findAll");
 
-        List<MusicJpaEntity> musics =  musicJpaRepository.findAll();
+        List<MusicJpaEntity> musics = musicJpaRepository.findAll();
         Long total = musicJpaRepository.count();
 
         PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
@@ -42,9 +43,28 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     }
 
     // 1
-    // findById(id),get()
-    public  MusicJpaEntity getMusicById(Integer id) {
+    // findById(id).get()
+    public MusicJpaEntity getMusicById(Integer id) {
         return musicJpaRepository.findById(id).get();
+    }
+
+    // 1
+    // findByInIn(ids)
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(List<Integer> musicIds) {
+
+        List<MusicJpaEntity> musics = musicJpaRepository.findByIdIn(musicIds);
+        Long total = musicJpaRepository.count();
+
+        log.warn("getMusicsByIds==========>MusicJpaServiceImpl/getMusicsByIds/musics={}", musics);
+
+        PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
+                .musics(Collections.singletonList(musics))
+                .total(total.intValue())
+                .current(1)
+                .pageSize(10)
+                .build();
+
+        return data;
     }
 
     // 1
@@ -55,7 +75,7 @@ public class MusicJpaServiceImpl implements MusicJpaService {
 
     // 2
     // save() - add
-    public void  addMusic(MusicJpaEntity music) {
+    public void addMusic(MusicJpaEntity music) {
         log.warn("addMusic{}", music);
         musicJpaRepository.save(music);
     }

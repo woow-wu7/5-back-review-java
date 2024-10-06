@@ -9,15 +9,17 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootTest
 @Slf4j
 public class Stream_Filter_Collect_Distinct_Test_2 {
 
     @Test
-    public void streamTest() {
+    public void streamTest1() {
         Person person1 = new Person("wang", 20);
         Person person2 = new Person("wu", 30);
         Person person3 = new Person("zhang", 40);
@@ -45,6 +47,32 @@ public class Stream_Filter_Collect_Distinct_Test_2 {
                 .map(Person::getAge) // ------------------------------ .map(p -> p.age) 等价
                 .reduce(0, (age1, age2) -> age1 + age2); // -- 使用 Lambda
         log.warn(number3.toString());
+    }
+
+
+    @Test
+    public void streamTest2() {
+
+        String ids = "1,3";
+
+        // 1
+        // Arrays.stream()
+        // - .map(Integer::parseInt) => 这里是将 每个 ( String ) 类型的数据 通过 ( parseInt ) 方法转成 ( Integer ) 类型
+        // - .map(Boolean::parseBoolean) => String -> Boolean
+        // - .map(String::toUpperCase) => 将字符串转换为大写
+        // - .map(Person::fromString) => 假设你有一个 Person 类，并且有一个方法 fromString 可以将字符串转换为 Person 对象
+        List<Integer> musicIds = Arrays.stream(ids.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        // 2
+        // Stream.of()
+        // - 这样也是也可的
+        List<Integer> musicIds2 = Stream.of(ids.split(",")).map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        log.warn("musicIds=============>: {}", musicIds);
+        log.warn("musicIds2=============>: {}", musicIds2);
     }
 
 

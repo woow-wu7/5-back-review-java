@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 // 1
 // final
@@ -51,7 +55,32 @@ public class MusicJpaApiController implements MusicJpaApi {
         return musicJpaService.getMusicById(id);
     }
 
-    ;
+    // 1
+    // getMusicsByIds
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(@RequestParam String ids) {
+        log.warn("getMusicsByIds==========>MusicJpaApiController/getMusicsByIds/ids={}", ids);
+
+        // 1
+        // Arrays.stream()
+        // - .map(Integer::parseInt) => 这里是将 每个 ( String ) 类型的数据 通过 ( parseInt ) 方法转成 ( Integer ) 类型
+        // - .map(Boolean::parseBoolean) => String -> Boolean
+        // - .map(String::toUpperCase) => 将字符串转换为大写
+        // - .map(Person::fromString) => 假设你有一个 Person 类，并且有一个方法 fromString 可以将字符串转换为 Person 对象
+        List<Integer> musicIds = Arrays.stream(ids.split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        // 2
+        // Stream.of()
+        // - 这样也是也可的
+        List<Integer> musicIds2 = Stream.of(ids.split(",")).map(Integer::parseInt)
+                .collect(Collectors.toList());
+
+        log.warn("musicIds=============>: {}", musicIds);
+        log.warn("musicIds2=============>: {}", musicIds2);
+
+        return musicJpaService.getMusicsByIds(musicIds);
+    }
 
     // 1
     public List<MusicJpaEntity> searchMusic(@RequestParam String keyword) {

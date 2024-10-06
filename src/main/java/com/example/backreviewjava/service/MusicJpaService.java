@@ -13,6 +13,8 @@ public interface MusicJpaService {
 
     public  MusicJpaEntity getMusicById(Integer id);
 
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(List<Integer> musicIds);
+
     public List<MusicJpaEntity> searchMusic(String keyword);
 
     public void addMusic(MusicJpaEntity music);
