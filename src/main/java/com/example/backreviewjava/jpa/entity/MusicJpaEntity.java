@@ -2,11 +2,8 @@ package com.example.backreviewjava.jpa.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -46,11 +43,32 @@ import java.util.Date;
 @Entity
 @Table(name = "music")
 public class MusicJpaEntity {
+    // 1
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // identity
     @Column(name = "id", nullable = false, unique = true, length = 64)
     // @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer id;
+
+
+    // 2
+    //  music(singer_id) => singer(id)
+    //  @ManyToOne ========================> 表示 ( 多个music ) 对 ( 1个singer )
+    //  @JoinColumn(name = "singer_id") ===> 表示 ( 指定外键的列 ) 是 ( singer_id )
+    // ---- ！！！！！！结合 SingerJpaEntity 中的 private List<MusicJpaEntity> musicList; 一起看！！！！！！！
+    @ManyToOne
+    @JoinColumn(name = "singer_id", nullable = false)
+    // name = "singer_id 表示 ( 指定外键的列 ) 是 ( singer_id )
+    // nullable = false 表示不能为 null // true 表示可以为null
+    // ---- 【  @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)  】 和 【  private SingerJpaEntity singer 】
+    // ---- 声明了一个新的属性 singer，这个是个外键对应的属性，MusicJpaEntity的singer属性并不在数据库的music表中，是新声明的
+    // ---- singer 对应的外键是 singer_id
+    private SingerJpaEntity singer;
+
+    // 2
+    // 这里通过 外键 后就不能再声明这一列了
+    // @Column(name = "singer_id", nullable = true)
+    // public Integer singer_id;
 
     // name
     // name: The 'name' represents the field that is mapped to the database.
@@ -68,9 +86,10 @@ public class MusicJpaEntity {
     @Column(name = "album", nullable = true)
     public String album;
 
-    @Column(name = "singer", nullable = true)
-//    @JsonProperty("music_singer")
-    public String singer;
+    // @Column(name = "singer", nullable = true)
+    // @JsonProperty("music_singer")
+    // public String singer;
+
 
     @Column(name = "date", nullable = true)
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")

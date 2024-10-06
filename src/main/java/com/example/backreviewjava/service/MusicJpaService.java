@@ -15,6 +15,11 @@ public interface MusicJpaService {
 
     public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(List<Integer> musicIds);
 
+    // 1
+    // 跨表查询 singer_id => table singer id
+    // music(singer_id) => singer(id)
+    public  PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(Integer singerId);
+
     public List<MusicJpaEntity> searchMusic(String keyword);
 
     public void addMusic(MusicJpaEntity music);

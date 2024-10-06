@@ -2,8 +2,10 @@
 package com.example.backreviewjava.service.impl;
 
 import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
+import com.example.backreviewjava.jpa.entity.SingerJpaEntity;
 import com.example.backreviewjava.jpa.repository.MusicJpaRepository;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
+import com.example.backreviewjava.jpa.repository.SingerJpaRepository;
 import com.example.backreviewjava.service.MusicJpaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,12 @@ import java.util.List;
 public class MusicJpaServiceImpl implements MusicJpaService {
 
     private final MusicJpaRepository musicJpaRepository;
-
+    private final SingerJpaRepository singerJpaRepository;
     // @Resource
     @Autowired
-    public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository) {
+    public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository, SingerJpaRepository singerJpaRepository) {
         this.musicJpaRepository = musicJpaRepository;
+        this.singerJpaRepository = singerJpaRepository;
     }
 
     // 1
@@ -66,6 +69,26 @@ public class MusicJpaServiceImpl implements MusicJpaService {
 
         return data;
     }
+
+    // 1
+    // 跨表查询 singer_id => table singer id
+    // music(singer_id) => singer(id)
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(Integer singerId) {
+
+        SingerJpaEntity singer = singerJpaRepository.findById(singerId);
+        log.warn("getMusicByIds==========>MusicJpaServiceImpl/get:【singerName】:{}", singer);
+
+        List<MusicJpaEntity> musics =  musicJpaRepository.findBySinger(singer);
+        Long total = musicJpaRepository.count();
+        PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
+                .musics(Collections.singletonList(musics))
+                .total(total.intValue())
+                .current(1)
+                .pageSize(10)
+                .build();
+        return data;
+    }
+
 
     // 1
     // searchByKeyword(keyword)

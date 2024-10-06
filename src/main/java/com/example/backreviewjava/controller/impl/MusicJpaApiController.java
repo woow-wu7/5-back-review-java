@@ -83,6 +83,13 @@ public class MusicJpaApiController implements MusicJpaApi {
     }
 
     // 1
+    // 跨表查询 singer_id => table singer id
+    // music(singer_id) => singer(id)
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(@RequestParam Integer singerId) {
+        return musicJpaService.getMusicBySinger(singerId);
+    }
+
+    // 1
     public List<MusicJpaEntity> searchMusic(@RequestParam String keyword) {
         log.warn("searchMusic==========>MusicJpaApiController/searchMusic/keyword={}", keyword);
         return musicJpaService.searchMusic(keyword);

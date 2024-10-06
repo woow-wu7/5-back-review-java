@@ -56,6 +56,13 @@ public interface MusicJpaApi {
     @RequestMapping(value = "/musics", method = RequestMethod.GET)
     public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(@RequestParam String ids);
 
+
+    // 1
+    // 跨表查询 singer_id => table singer id
+    // music(singer_id) => singer(id)
+    @GetMapping("/music/byId")
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(@RequestParam Integer singerId);
+
     // 1
     // searchMusic
     // -- fuzzy query
