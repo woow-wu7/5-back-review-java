@@ -32,5 +32,5 @@ public interface MusicJpaRepository extends JpaRepository<MusicJpaEntity, Intege
 
     // 3
     // music(singer_id) => singer(id)
-    List<MusicJpaEntity> findBySinger(SingerJpaEntity singer);
+//    List<MusicJpaEntity> findBySinger(SingerJpaEntity singer);
 }

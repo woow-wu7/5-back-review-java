@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,13 +21,19 @@ import java.util.List;
 @Slf4j
 public class MusicJpaServiceImpl implements MusicJpaService {
 
+    // @PersistenceContext
+    // - @PersistenceContext 是 JPA（Java Persistence API）中的一个注解，用于将 EntityManager 注入到你的服务类中。
+    // - 这种方式通常用于 Spring 应用程序中，Spring 会自动管理 EntityManager 的生命周期
+    @PersistenceContext
+    private EntityManager entityManager;
+
     private final MusicJpaRepository musicJpaRepository;
-    private final SingerJpaRepository singerJpaRepository;
+//    private final SingerJpaRepository singerJpaRepository;
     // @Resource
     @Autowired
     public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository, SingerJpaRepository singerJpaRepository) {
         this.musicJpaRepository = musicJpaRepository;
-        this.singerJpaRepository = singerJpaRepository;
+//        this.singerJpaRepository = singerJpaRepository;
     }
 
     // 1
@@ -52,7 +61,31 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     }
 
     // 1
-    // findByInIn(ids)
+    // 【 getAllMusicsThroughEntityManger 】!!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
+    // 使用 EntityManager 来手动创建和执行查询的场景
+    // - 简化开发：Spring Data JPA 提供了许多内置的方法，如 findAll()、findById()、save() 等，可以大大简化数据访问层的开发。
+    // - 自动生成查询：你可以通过方法名约定来自动生成查询，例如 findByName(String name) 会自动生成一个根据 name 字段查询的查询语句。
+    // - 适用于简单查询：当你需要处理简单的 CRUD 操作时，这种方式非常方便。
+    // ---- 问题: JPA 有几种查询方式
+    // ---- 1. JpaRepository 接口: 自动，简单
+    // -----2. EntityManager: 手动创建和执行查询，更灵活，但需要更多的代码
+    public List<MusicJpaEntity> getAllMusicsThroughEntityManger() {
+
+        // 创建 HQL 查询语句 Hibernate Query Language
+        String hql = "SELECT a FROM MusicJpaEntity a";
+
+        // 使用 EntityManager 创建查询对象
+        Query query = entityManager.createQuery(hql, MusicJpaEntity.class);
+
+        log.warn("getAllMusicsThroughEntityManger==========>MusicJpaServiceImpl/getAllMusicsThroughEntityManger/query={}", query);
+        // 执行查询并返回结果
+        return query.getResultList();
+    }
+
+
+    // 1
+    // 【 getMusicsByIds 】!!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
+    // => findByIdIn => Select * from AAA where id in (1,2,3)
     public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicsByIds(List<Integer> musicIds) {
 
         List<MusicJpaEntity> musics = musicJpaRepository.findByIdIn(musicIds);
@@ -71,27 +104,30 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     }
 
     // 1
+    // 【 getMusicBySinger 】!!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
     // 跨表查询 singer_id => table singer id
     // music(singer_id) => singer(id)
-    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(Integer singerId) {
-
-        SingerJpaEntity singer = singerJpaRepository.findById(singerId);
-        log.warn("getMusicByIds==========>MusicJpaServiceImpl/get:【singerName】:{}", singer);
-
-        List<MusicJpaEntity> musics =  musicJpaRepository.findBySinger(singer);
-        Long total = musicJpaRepository.count();
-        PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
-                .musics(Collections.singletonList(musics))
-                .total(total.intValue())
-                .current(1)
-                .pageSize(10)
-                .build();
-        return data;
-    }
+//    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(Integer singerId) {
+//
+//        SingerJpaEntity singer = singerJpaRepository.findById(singerId);
+//        log.warn("getMusicByIds==========>MusicJpaServiceImpl/get:【singerName】:{}", singer);
+//
+//        List<MusicJpaEntity> musics =  musicJpaRepository.findBySinger(singer);
+//        Long total = musicJpaRepository.count();
+//        PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
+//                .musics(Collections.singletonList(musics))
+//                .total(total.intValue())
+//                .current(1)
+//                .pageSize(10)
+//                .build();
+//        return data;
+//    }
 
 
     // 1
-    // searchByKeyword(keyword)
+    // 【 searchMusic 】 !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
+    // -- fuzzy query 模糊查询
+    // -- => keyword
     public List<MusicJpaEntity> searchMusic(String keyword) {
         return musicJpaRepository.searchByKeyword(keyword);
     }

@@ -56,14 +56,15 @@ public class MusicJpaEntity {
     //  @ManyToOne ========================> 表示 ( 多个music ) 对 ( 1个singer )
     //  @JoinColumn(name = "singer_id") ===> 表示 ( 指定外键的列 ) 是 ( singer_id )
     // ---- ！！！！！！结合 SingerJpaEntity 中的 private List<MusicJpaEntity> musicList; 一起看！！！！！！！
-    @ManyToOne
-    @JoinColumn(name = "singer_id", nullable = false)
+
+//    @ManyToOne
+//    @JoinColumn(name = "singer_id", nullable = false)
     // name = "singer_id 表示 ( 指定外键的列 ) 是 ( singer_id )
     // nullable = false 表示不能为 null // true 表示可以为null
     // ---- 【  @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)  】 和 【  private SingerJpaEntity singer 】
     // ---- 声明了一个新的属性 singer，这个是个外键对应的属性，MusicJpaEntity的singer属性并不在数据库的music表中，是新声明的
     // ---- singer 对应的外键是 singer_id
-    private SingerJpaEntity singer;
+//    private SingerJpaEntity singer;
 
     // 2
     // 这里通过 外键 后就不能再声明这一列了

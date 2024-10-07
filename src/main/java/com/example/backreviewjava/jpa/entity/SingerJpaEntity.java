@@ -30,6 +30,6 @@ public class SingerJpaEntity {
     // 1.3 cascade = CascadeType.ALL：
     // -- 表示在进行级联操作时，所有操作（如保存、删除等）都会传递到相关的 Music 实体。
     // -- 例如，如果删除一个 Singer，同时会删除与该歌手关联的所有 Music 实体。
-    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)
-    private List<MusicJpaEntity> musicList;
+//    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)
+//    private List<MusicJpaEntity> musicList;
 }
