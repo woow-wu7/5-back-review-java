@@ -84,5 +84,15 @@ public class Stream_Filter_Collect_Distinct_Test_2 {
         String name;
         Integer age;
     }
+
+
+    @Test
+    public void StringEquals() {
+        String a = "hello";
+        String b = "hello2";
+
+        Boolean isEqual = a.equals(b);
+        log.warn("isEqual: {}", isEqual);
+    }
 }
 

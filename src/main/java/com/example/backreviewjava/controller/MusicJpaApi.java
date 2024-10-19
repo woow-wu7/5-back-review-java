@@ -4,14 +4,17 @@ import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.util.List;
 
@@ -124,5 +127,4 @@ public interface MusicJpaApi {
     })
     @RequestMapping(value = "/music/{id}", method = RequestMethod.DELETE)
     public void deleteMusic(@PathVariable Integer id);
-
 }
