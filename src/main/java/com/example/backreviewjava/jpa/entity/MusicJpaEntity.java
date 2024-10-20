@@ -2,6 +2,7 @@ package com.example.backreviewjava.jpa.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +45,8 @@ import java.util.Date;
 @Table(name = "music")
 public class MusicJpaEntity {
     // 1
+    // GenerationType enumeration: TABLE, SEQUENCE, IDENTITY, AUTO;
+    // nullable: It's means the attribute can not empty.
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // identity
     @Column(name = "id", nullable = false, unique = true, length = 64)
@@ -87,9 +90,9 @@ public class MusicJpaEntity {
     @Column(name = "album", nullable = true)
     public String album;
 
-    // @Column(name = "singer", nullable = true)
-    // @JsonProperty("music_singer")
-    // public String singer;
+     @Column(name = "singer", nullable = true)
+     @JsonProperty("music_singer")
+     public String singer;
 
 
     @Column(name = "date", nullable = true)

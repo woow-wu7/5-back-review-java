@@ -2,6 +2,7 @@
 package com.example.backreviewjava.service.impl;
 
 import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
+import com.example.backreviewjava.jpa.entity.MusicCustomSampleJpaEntity;
 import com.example.backreviewjava.jpa.entity.SingerJpaEntity;
 import com.example.backreviewjava.jpa.repository.MusicJpaRepository;
 import com.example.backreviewjava.jpa.entity.MusicJpaEntity;
@@ -28,11 +29,13 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     private EntityManager entityManager;
 
     private final MusicJpaRepository musicJpaRepository;
+    private final MusicCustomSampleJpaEntity musicCustomSampleJpaEntity;
 //    private final SingerJpaRepository singerJpaRepository;
     // @Resource
     @Autowired
-    public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository, SingerJpaRepository singerJpaRepository) {
+    public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository, SingerJpaRepository singerJpaRepository, MusicCustomSampleJpaEntity musicCustomSampleJpaEntity) {
         this.musicJpaRepository = musicJpaRepository;
+        this.musicCustomSampleJpaEntity = musicCustomSampleJpaEntity;
 //        this.singerJpaRepository = singerJpaRepository;
     }
 
@@ -71,15 +74,31 @@ public class MusicJpaServiceImpl implements MusicJpaService {
     // -----2. EntityManager: 手动创建和执行查询，更灵活，但需要更多的代码
     public List<MusicJpaEntity> getAllMusicsThroughEntityManger() {
 
+        // 1
         // 创建 HQL 查询语句 Hibernate Query Language
         String hql = "SELECT a FROM MusicJpaEntity a";
-
         // 使用 EntityManager 创建查询对象
         Query query = entityManager.createQuery(hql, MusicJpaEntity.class);
-
+        List<MusicJpaEntity> resultList = query.getResultList();
         log.warn("getAllMusicsThroughEntityManger==========>MusicJpaServiceImpl/getAllMusicsThroughEntityManger/query={}", query);
+        log.warn("resultList000000000--{}:"+ resultList);
+
+
+        // 2
+        // new
+        // - function: Reduce the number of attributes/properties in the returned data.
+        // - attribute = property 属性
+        // - property 属性 财产 n
+        // - returned 返回的 adj
+        String sql2 = "SELECT new com.example.backreviewjava.jpa.entity.MusicCustomSampleJpaEntity(m.name, m.singer) FROM MusicJpaEntity m";
+        Query query2 = entityManager.createQuery(sql2, MusicCustomSampleJpaEntity.class);
+        List<MusicCustomSampleJpaEntity> resultList2 = query2.getResultList();
+        log.warn("resultList1111111111--{}:"+ resultList2);
+
+
+
         // 执行查询并返回结果
-        return query.getResultList();
+        return resultList;
     }
 
 
