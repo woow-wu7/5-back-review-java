@@ -32,4 +32,7 @@ public class SingerJpaEntity {
     // -- 例如，如果删除一个 Singer，同时会删除与该歌手关联的所有 Music 实体。
 //    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL)
 //    private List<MusicJpaEntity> musicList;
+
+      @OneToMany(mappedBy = "songSinger", cascade = CascadeType.ALL)
+      private  List<MusicJpaEntity> musicList;
 }

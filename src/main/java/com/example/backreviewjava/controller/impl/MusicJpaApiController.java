@@ -104,6 +104,9 @@ public class MusicJpaApiController implements MusicJpaApi {
     //    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(@RequestParam Integer singerId) {
     //        return musicJpaService.getMusicBySinger(singerId);
     //    }
+        public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusicByForeignKey() {
+            return musicJpaService.getAllMusicByForeignKey();
+        }
 
     // 1
     // 【 searchMusic 】 !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!

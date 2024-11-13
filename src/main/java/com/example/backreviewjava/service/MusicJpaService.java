@@ -33,7 +33,8 @@ public interface MusicJpaService {
     // 【 getMusicBySinger 】!!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
     // 跨表查询 singer_id => table singer id
     // music(singer_id) => singer(id)
-//    public  PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(Integer singerId);
+    // public  PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(Integer singerId);
+    public  PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusicByForeignKey();
 
 
     // 1

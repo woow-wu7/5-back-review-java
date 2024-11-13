@@ -1,6 +1,7 @@
 
 package com.example.backreviewjava.service.impl;
 
+import com.example.backreviewjava.dto.MusicWithSingerDTO;
 import com.example.backreviewjava.dto.PaginationMybatisMusicDTO;
 import com.example.backreviewjava.jpa.entity.MusicCustomSampleJpaEntity;
 import com.example.backreviewjava.jpa.entity.SingerJpaEntity;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class MusicJpaServiceImpl implements MusicJpaService {
 
     private final MusicJpaRepository musicJpaRepository;
     private final MusicCustomSampleJpaEntity musicCustomSampleJpaEntity;
-//    private final SingerJpaRepository singerJpaRepository;
+
+    //    private final SingerJpaRepository singerJpaRepository;
     // @Resource
     @Autowired
     public MusicJpaServiceImpl(MusicJpaRepository musicJpaRepository, SingerJpaRepository singerJpaRepository, MusicCustomSampleJpaEntity musicCustomSampleJpaEntity) {
@@ -81,7 +84,7 @@ public class MusicJpaServiceImpl implements MusicJpaService {
         Query query = entityManager.createQuery(hql, MusicJpaEntity.class);
         List<MusicJpaEntity> resultList = query.getResultList();
         log.warn("getAllMusicsThroughEntityManger==========>MusicJpaServiceImpl/getAllMusicsThroughEntityManger/query={}", query);
-        log.warn("resultList000000000--{}:"+ resultList);
+        log.warn("resultList000000000--{}:" + resultList);
 
 
         // 2
@@ -93,8 +96,7 @@ public class MusicJpaServiceImpl implements MusicJpaService {
         String sql2 = "SELECT new com.example.backreviewjava.jpa.entity.MusicCustomSampleJpaEntity(m.name, m.singer) FROM MusicJpaEntity m";
         Query query2 = entityManager.createQuery(sql2, MusicCustomSampleJpaEntity.class);
         List<MusicCustomSampleJpaEntity> resultList2 = query2.getResultList();
-        log.warn("resultList1111111111--{}:"+ resultList2);
-
+        log.warn("resultList1111111111--{}:" + resultList2);
 
 
         // 执行查询并返回结果
@@ -141,6 +143,36 @@ public class MusicJpaServiceImpl implements MusicJpaService {
 //                .build();
 //        return data;
 //    }
+
+
+    @Transactional
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusicByForeignKey() {
+
+
+        String hql2 = "SELECT NEW com.example.backreviewjava.dto.MusicWithSingerDTO(m.id, m.name, m.album, m.date, s.id, s.name) FROM MusicJpaEntity m, SingerJpaEntity s WHERE (m.singer_id === )";
+        Query query2 = entityManager.createQuery(hql2, MusicJpaEntity.class);
+        List<MusicWithSingerDTO> resultList2 = query2.getResultList();
+        log.warn("resultList222222222--{}:" + resultList2);
+
+
+//        String sql2 = "SELECT new com.example.backreviewjava.jpa.entity.MusicCustomSampleJpaEntity FROM MusicJpaEntity m OIN FETCH m.songSinger";
+        String hql = "SELECT a FROM MusicJpaEntity a JOIN FETCH a.songSinger";
+        Query query = entityManager.createQuery(hql, MusicJpaEntity.class);
+
+//
+        List<MusicJpaEntity> resultList = query.getResultList();
+        log.warn("getAllMusicByForeignKey==========>", resultList);
+
+        Long total = musicJpaRepository.count();
+        PaginationMybatisMusicDTO data = new PaginationMybatisMusicDTO<MusicJpaEntity>().builder()
+                .musics(Collections.singletonList(resultList))
+                .total(total.intValue())
+                .current(1)
+                .pageSize(10)
+                .build();
+
+        return data;
+    }
 
 
     // 1

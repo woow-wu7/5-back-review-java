@@ -80,11 +80,12 @@ public interface MusicJpaApi {
 
 
     // 1
+    // 外键
     //【 getMusicBySinger 】!!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!
     // 跨表查询 singer_id => table singer id
     // music(singer_id) => singer(id)
-//    @GetMapping("/music/byId")
-//    public PaginationMybatisMusicDTO<MusicJpaEntity> getMusicBySinger(@RequestParam Integer singerId);
+    @GetMapping("/music/getAllMusicByForeignKey")
+    public PaginationMybatisMusicDTO<MusicJpaEntity> getAllMusicByForeignKey();
 
     // 1
     //【 searchMusic 】 !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!! !!!!!!!

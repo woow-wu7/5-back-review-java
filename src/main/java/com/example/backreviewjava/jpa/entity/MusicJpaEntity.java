@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -69,6 +71,11 @@ public class MusicJpaEntity {
     // ---- singer 对应的外键是 singer_id
 //    private SingerJpaEntity singer;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) // 使用 EAGER 加载策略
+    @JoinColumn(name = "singer_id", nullable = true)
+//    @NotFound(action = NotFoundAction.IGNORE) // 忽略不存在的 SingerJpaEntity
+    private SingerJpaEntity songSinger;
+
     // 2
     // 这里通过 外键 后就不能再声明这一列了
     // @Column(name = "singer_id", nullable = true)
@@ -90,9 +97,9 @@ public class MusicJpaEntity {
     @Column(name = "album", nullable = true)
     public String album;
 
-     @Column(name = "singer", nullable = true)
-     @JsonProperty("music_singer")
-     public String singer;
+//     @Column(name = "singer", nullable = true)
+//     @JsonProperty("music_singer")
+//     public String singer;
 
 
     @Column(name = "date", nullable = true)
